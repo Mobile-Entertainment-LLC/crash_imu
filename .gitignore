@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+recordings/
+ride_bag/
+*.csv
+*.mcap
+
+*.png
+!docs/*.png
+
+run_ros.sh
+
+.claude/
