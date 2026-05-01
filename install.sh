@@ -16,6 +16,7 @@ cp *.py \
    README.md \
    requirements.txt \
    setup.sh \
+   crash-detector.service \
    $INSTALL_DIR
 
 # Now run the setup script
