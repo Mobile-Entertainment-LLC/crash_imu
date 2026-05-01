@@ -23,6 +23,17 @@ chmod +x setup.sh
 
 ## Run
 
+`setup.sh` installs and enables a systemd unit (`crash-detector.service`) that runs the classifier on boot. Manage it with:
+
+```bash
+sudo systemctl status crash-detector
+sudo systemctl restart crash-detector
+sudo systemctl disable --now crash-detector   # stop auto-start
+journalctl -u crash-detector -f               # live logs
+```
+
+Or run it manually in the foreground:
+
 ```bash
 python3 segway_behavior_classifier.py
 ```
@@ -81,7 +92,8 @@ python3 plot_ride.py recordings/ride_<timestamp>.csv
 - **`IMU.py`** — unified BerryIMU driver. Auto-detects the board version on startup and dispatches reads to the correct sensor module.
 - **`BMP388.py`** — lightweight BMP388 barometer driver (temperature, pressure, altitude) over I2C using `smbus2`.
 - **`LSM6DSL.py`**, **`LSM6DSV320X.py`**, **`LSM9DS0.py`**, **`LSM9DS1.py`**, **`LIS3MDL.py`** — register maps and init routines for each sensor variant a BerryIMU can ship with.
-- **`setup.sh`** — one-shot installer: apt packages, pip packages, I2C enable, gpsd enable.
+- **`setup.sh`** — one-shot installer: apt packages, pip packages, I2C enable, gpsd enable, systemd service install.
+- **`crash-detector.service`** — systemd unit template (paths/user filled in by `setup.sh` at install time).
 - **`requirements.txt`** — Python pip dependencies (just `mcap`).
 
 ## Detection thresholds

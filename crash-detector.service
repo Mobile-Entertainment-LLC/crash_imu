@@ -1,0 +1,15 @@
+[Unit]
+Description=Segway Crash Detector
+After=network.target gpsd.service sound.target
+Wants=gpsd.service
+
+[Service]
+ExecStart=/usr/bin/python3 __WORKDIR__/segway_behavior_classifier.py
+WorkingDirectory=__WORKDIR__
+Restart=on-failure
+RestartSec=5
+User=__USER__
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
